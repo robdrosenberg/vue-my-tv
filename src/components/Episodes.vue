@@ -2,6 +2,9 @@
 import { defineComponent } from "vue";
 import { HeartIcon as HeartIconOutline } from "@heroicons/vue/outline";
 import { HeartIcon as HeartIconSolid } from "@heroicons/vue/solid";
+import firebase from "@/firebaseConfig";
+
+const db = firebase.firestore();
 
 export default defineComponent({
   components: {
@@ -33,10 +36,46 @@ export default defineComponent({
         this.error = searchedShow.Error;
       }
     },
-    toggleFavorite(episodeId) {
-      this.episodes[episodeId]["favorite"] = !this.episodes[episodeId][
-        "favorite"
-      ];
+    async addFavorite(episodeId) {
+      this.episodes[episodeId]["favorite"] = true;
+      const addEpisode = this.episodes[episodeId];
+      db.collection("favorites")
+        .add({ ...addEpisode })
+        .then(() => {
+          console.log("Document Succesfully written!");
+        })
+        .catch((error) => {
+          console.error("Error writing document: ", error);
+        });
+    },
+    async removeFavorite(episodeId) {
+      this.episodes[episodeId]["favorite"] = false;
+      const removeEpisode = this.episodes[episodeId];
+      const deleteDocID = "";
+      await db
+        .collection("favorites")
+        .where("imdbID", "==", removeEpisode.imdbID)
+        .get()
+        .then((querySnapshot) => {
+          querySnapshot.forEach((doc) => {
+            this.deleteDocID = doc.id;
+            console.log(this.deleteDocID, " =>", doc.data());
+          });
+        })
+        .then(() => {
+          db.collection("favorites")
+            .doc(this.deleteDocID)
+            .delete()
+            .then(() => {
+              console.log("Document Succesfully deleted");
+            })
+            .catch((error) => {
+              console.error("Error removing document: ", error);
+            });
+        })
+        .catch((error) => {
+          console.log("Error getting documents: ", error);
+        });
     },
   },
 });
@@ -78,12 +117,12 @@ export default defineComponent({
         </div>
         <div class="col-start-3">
           <HeartIconSolid
-            @click="toggleFavorite(index)"
+            @click="removeFavorite(index)"
             v-if="episode.favorite"
             class="h-5 w-5 cursor-pointer text-red-500"
           />
           <HeartIconOutline
-            @click="toggleFavorite(index)"
+            @click="addFavorite(index)"
             v-else
             class="h-5 w-5 cursor-pointer"
           />
