@@ -13,6 +13,6 @@
       </div>
     </header>
 
-    <router-view class="h-full" />
+    <router-view class="h-screen bg-gray-50" />
   </main>
 </template>
