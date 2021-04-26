@@ -1,12 +1,3 @@
-<script>
-import { defineComponent } from 'vue'
-import ButtonRepo from '@/components/ButtonRepo.vue'
-
-export default defineComponent({
-  components: { ButtonRepo },
-})
-</script>
-
 <template>
   <main>
     <div class="bg-gray-50">
@@ -28,9 +19,16 @@ export default defineComponent({
               >Back Home</router-link
             >
           </div>
-          <ButtonRepo />
         </div>
       </div>
     </div>
   </main>
 </template>
+
+<script>
+import { defineComponent } from "vue";
+
+export default defineComponent({
+  components: {},
+});
+</script>

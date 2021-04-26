@@ -1,15 +1,3 @@
-<script>
-import { defineComponent } from "vue";
-import ButtonRepo from "@/components/ButtonRepo.vue";
-import Episodes from "@/components/Episodes.vue";
-
-export default defineComponent({
-  components: {
-    Episodes,
-  },
-});
-</script>
-
 <template>
   <main>
     <div class="">
@@ -20,9 +8,70 @@ export default defineComponent({
           Search your Favorite TV Shows
         </h2>
         <div>
-          <Episodes />
+          <form @submit.prevent="getEpisodes">
+            <label for="title">TV Title: </label>
+            <input
+              type="text"
+              class="mr-8"
+              name="title"
+              v-model="title"
+              placeholder="Name of TV Show"
+            />
+            <label for="season">Season: </label>
+            <input
+              type="text"
+              name="season"
+              v-model="season"
+              placeholder="Season #"
+            />
+            <button type="submit" class="rounded ml-8 p-4 hover:bg-gray-200">
+              Search
+            </button>
+          </form>
+          <h2 v-if="error">{{ error }}</h2>
+          <EpisodeList :episodes="episodes" />
         </div>
       </div>
     </div>
   </main>
 </template>
+
+<script>
+import { defineComponent } from "vue";
+import EpisodeList from "@/components/EpisodeList.vue";
+import firebase from "@/firebaseConfig";
+
+const db = firebase.firestore();
+
+export default defineComponent({
+  components: {
+    EpisodeList,
+  },
+  data() {
+    return {
+      episodes: [],
+      show: {},
+      error: null,
+      title: "",
+      season: "",
+    };
+  },
+  methods: {
+    async getEpisodes() {
+      const searchedShow = await fetch(
+        `http://www.omdbapi.com/?apikey=${import.meta.env.VITE_OMDB_API}&t=${
+          this.title
+        }&Season=${this.season}`
+      ).then((response) => response.json());
+      if (searchedShow.Response) {
+        this.show = { ...searchedShow };
+        this.episodes = searchedShow.Episodes.map((episode) => {
+          return { ...episode, favorite: false };
+        });
+      } else {
+        this.error = searchedShow.Error;
+      }
+    },
+  },
+});
+</script>
