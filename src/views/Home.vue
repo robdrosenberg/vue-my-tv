@@ -32,7 +32,7 @@
             </button>
           </form>
           <h2 v-if="error">{{ error }}</h2>
-          <EpisodeList :episodes="episodes" />
+          <EpisodeList :show="show" :episodes="episodes" />
         </div>
       </div>
     </div>
@@ -66,7 +66,7 @@ export default defineComponent({
   methods: {
     async getEpisodes() {
       const searchedShow = await fetch(
-        `http://www.omdbapi.com/?apikey=${import.meta.env.VITE_OMDB_API}&t=${
+        `https://www.omdbapi.com/?apikey=${import.meta.env.VITE_OMDB_API}&t=${
           this.title
         }&Season=${this.season}`
       ).then((response) => response.json());
