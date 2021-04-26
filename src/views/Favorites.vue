@@ -5,6 +5,7 @@
       <h1>Favorite Episodes</h1>
       <div>
         <p>Favs</p>
+        <EpisodeList :episodes="favorites" />
       </div>
     </div>
   </main>
@@ -12,13 +13,20 @@
 
 <script>
 import { defineComponent } from "vue";
+import { mapState } from "vuex";
+import EpisodeList from "@/components/EpisodeList.vue";
 
 export default defineComponent({
-  components: {},
+  components: {
+    EpisodeList,
+  },
   data() {
     return {
       episodes: [],
     };
+  },
+  computed: {
+    ...mapState(["favorites"]),
   },
 });
 </script>

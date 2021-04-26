@@ -24,7 +24,10 @@
               v-model="season"
               placeholder="Season #"
             />
-            <button type="submit" class="rounded ml-8 p-4 hover:bg-gray-200">
+            <button
+              type="submit"
+              class="bg-black text-white rounded ml-8 p-4 hover:bg-gray-200"
+            >
               Search
             </button>
           </form>
@@ -40,6 +43,7 @@
 import { defineComponent } from "vue";
 import EpisodeList from "@/components/EpisodeList.vue";
 import firebase from "@/firebaseConfig";
+import { mapState } from "vuex";
 
 const db = firebase.firestore();
 
@@ -55,6 +59,9 @@ export default defineComponent({
       title: "",
       season: "",
     };
+  },
+  computed: {
+    ...mapState(["favorites"]),
   },
   methods: {
     async getEpisodes() {

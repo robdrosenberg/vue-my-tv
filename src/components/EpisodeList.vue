@@ -56,12 +56,6 @@ export default defineComponent({
       default: {},
     },
   },
-  data() {
-    return {
-      title: "",
-      season: "",
-    };
-  },
   methods: {
     async addFavorite(episodeId) {
       this.episodes[episodeId]["favorite"] = true;

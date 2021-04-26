@@ -1,6 +1,6 @@
 <template>
   <main>
-    <header class="bg-white shadow" v-if="$route.meta.title">
+    <header class="sticky top-0 bg-white shadow" v-if="$route.meta.title">
       <div
         class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8 flex items-center"
       >
@@ -13,12 +13,15 @@
       </div>
     </header>
 
-    <router-view class="h-screen bg-gray-50" />
+    <router-view class="bg-gray-50 min-h-screen" />
   </main>
 </template>
 
 <script>
 export default {
   name: "App",
+  mounted() {
+    this.$store.dispatch("getFavorites");
+  },
 };
 </script>
