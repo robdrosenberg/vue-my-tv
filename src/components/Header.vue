@@ -15,7 +15,10 @@
       </svg>
       <div class="ml-16">
         <router-link to="/" class="mr-4 header-link">Home</router-link>
-        <router-link to="/favorites" class="header-link">Favorites</router-link>
+        <router-link to="/favorites" class="mr-4 header-link"
+          >Favorites</router-link
+        >
+        <router-link to="/words" class="header-link">Top Words</router-link>
       </div>
     </div>
   </header>

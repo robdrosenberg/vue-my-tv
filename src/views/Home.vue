@@ -1,11 +1,7 @@
 <template>
   <main>
-    <div class="max-w-screen-lg px-4 py-12 mx-auto sm:px-6 lg:py-16 lg:px-8">
-      <h2
-        class="text-3xl font-extrabold leading-9 tracking-tight text-gray-900 sm:text-4xl sm:leading-10 mb-10 text-center"
-      >
-        Search your Favorite TV Shows
-      </h2>
+    <div class="main-container">
+      <h1 class="main-heading">Search Your Favorite TV Shows</h1>
       <div class="">
         <form @submit.prevent="getShow" class="mt-8 mb-16 sm:mx-auto sm:flex">
           <div class="min-w-0 flex-1">
