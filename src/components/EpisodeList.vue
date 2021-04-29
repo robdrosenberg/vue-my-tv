@@ -1,35 +1,32 @@
 <template>
   <div>
     <div>
-      <h1
-        v-if="show.Season"
-        class="mt-16 text-2xl font-extrabold leading-9 tracking-tight text-gray-900 sm:text-4xl sm:leading-10 mb-10"
-      >
-        Season {{ show.Season }} Episodes
-      </h1>
-      <div
-        :key="index"
-        v-for="(episode, index) in episodes"
-        class="p-4 bg-gray-100 mb-4 grid grid-cols-3 items-center w-1/2 rounded-md"
-      >
-        <div class="col-span-2">
-          <h1>Episode {{ episode.Episode }}: {{ episode.Title }}</h1>
-          <p>{{ episode.Released }}</p>
-          <p>{{ episode.imdbRating }} IMDB Rating</p>
-        </div>
-        <div class="col-start-3">
-          <HeartIconSolid
-            @click="removeFavorite(index)"
-            v-if="episode.favorite"
-            class="h-5 w-5 cursor-pointer text-red-500"
+      <ul class="space-y-3 mt-3">
+        <li
+          v-for="(episode, index) in episodes"
+          :key="index"
+          class="flex flex-col lg:flex-row pr-4 lg:items-center bg-white shadow overflow-hidden sm:rounded-md"
+        >
+          <!-- Your content -->
+          <EpisodeItem
+            :episode="episode"
+            :show="show"
+            :displayTitle="favoriteList"
           />
-          <HeartIconOutline
-            @click="addFavorite(index)"
-            v-else
-            class="h-5 w-5 cursor-pointer"
-          />
-        </div>
-      </div>
+          <div class="px-8 pb-4">
+            <HeartIconSolid
+              @click="removeFavorite(index)"
+              v-if="isFavorited(episode.imdbID)"
+              class="favorite-icon text-red-500"
+            />
+            <HeartIconOutline
+              @click="addFavorite(index, show.Title)"
+              v-else
+              class="favorite-icon"
+            />
+          </div>
+        </li>
+      </ul>
     </div>
   </div>
 </template>
@@ -39,6 +36,8 @@ import { defineComponent } from "vue";
 import { HeartIcon as HeartIconOutline } from "@heroicons/vue/outline";
 import { HeartIcon as HeartIconSolid } from "@heroicons/vue/solid";
 import firebase from "@/firebaseConfig";
+import { mapState } from "vuex";
+import EpisodeItem from "@/components/EpisodeItem.vue";
 
 const db = firebase.firestore();
 
@@ -46,6 +45,7 @@ export default defineComponent({
   components: {
     HeartIconOutline,
     HeartIconSolid,
+    EpisodeItem,
   },
   props: {
     episodes: {
@@ -56,13 +56,27 @@ export default defineComponent({
       type: Object,
       default: {},
     },
+    favoriteList: {
+      type: Boolean,
+      default: false,
+    },
+  },
+  computed: {
+    ...mapState(["favorites"]),
+    favoriteSet() {
+      console.log(this.favorites);
+      return new Set(this.favorites.map((favorite) => favorite.imdbID));
+    },
   },
   methods: {
-    async addFavorite(episodeId) {
+    isFavorited(imdbID) {
+      return this.favoriteSet.has(imdbID);
+    },
+    async addFavorite(episodeId, showTitle) {
       this.episodes[episodeId]["favorite"] = true;
       const addEpisode = this.episodes[episodeId];
       db.collection("favorites")
-        .add({ ...addEpisode })
+        .add({ ...addEpisode, showTitle })
         .then(() => {
           console.log("Document Succesfully written!");
         })

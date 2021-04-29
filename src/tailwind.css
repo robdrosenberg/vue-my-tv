@@ -3,3 +3,12 @@
 @import 'tailwindcss/components';
 
 @import 'tailwindcss/utilities';
+
+@layer components {
+    .header-link {
+        @apply hover:border-b-2 pb-2 border-blue-500;
+    }
+    .favorite-icon {
+        @apply h-8 w-8 cursor-pointer hover:transform-gpu hover:scale-125 hover:ease-in duration-300;
+    }
+}
