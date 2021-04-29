@@ -37,13 +37,6 @@ export default defineComponent({
         wordArray.forEach((word) =>
           mostFrequent[word] ? mostFrequent[word]++ : (mostFrequent[word] = 1)
         );
-        // const test = wordArray.reduce((word) => {
-        //   if (punctuations.includes(word.charAt(word.length - 1))) {
-        //     console.log(word)
-        //     return word.slice(0, -1);
-        //   }
-        //   return word;
-        // });
       });
       let keyValues = Object.entries(mostFrequent);
       let sortedTopWords = keyValues.sort((a, b) => b[1] - a[1]).slice(0, 10);

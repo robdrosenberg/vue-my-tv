@@ -64,7 +64,6 @@ export default defineComponent({
   computed: {
     ...mapState(["favorites"]),
     favoriteSet() {
-      console.log(this.favorites);
       return new Set(this.favorites.map((favorite) => favorite.imdbID));
     },
   },
@@ -95,7 +94,6 @@ export default defineComponent({
         .then((querySnapshot) => {
           querySnapshot.forEach((doc) => {
             this.deleteDocID = doc.id;
-            console.log(this.deleteDocID, " =>", doc.data());
           });
         })
         .then(() => {

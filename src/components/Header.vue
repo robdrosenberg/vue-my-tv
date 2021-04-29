@@ -1,6 +1,6 @@
 <template>
   <header class="sticky top-0 z-10 bg-white shadow">
-    <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8 flex items-center">
+    <div class="max-w-7xl mx-auto py-4 px-2 sm:px-6 lg:px-8 flex items-center">
       <svg
         width="40"
         height="40"
@@ -13,7 +13,7 @@
           fill="black"
         />
       </svg>
-      <div class="ml-16">
+      <div class="ml-8 sm:ml-16">
         <router-link to="/" class="mr-4 header-link">Home</router-link>
         <router-link to="/favorites" class="mr-4 header-link"
           >Favorites</router-link

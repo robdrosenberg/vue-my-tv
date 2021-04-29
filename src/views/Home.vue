@@ -3,7 +3,10 @@
     <div class="main-container">
       <h1 class="main-heading">Search Your Favorite TV Shows</h1>
       <div class="">
-        <form @submit.prevent="getShow" class="mt-8 mb-16 sm:mx-auto sm:flex">
+        <form
+          @submit.prevent="getShow"
+          class="mt-8 mb-4 sm:mb-16 sm:mx-auto sm:flex"
+        >
           <div class="min-w-0 flex-1">
             <label for="title" class="sr-only">Enter Show Title</label>
             <input
@@ -84,10 +87,8 @@ export default defineComponent({
         ).then((response) => response.json());
         if (showSearch.Response === "True") {
           this.show = { ...showSearch };
-          console.log("Show found?", this.show);
         } else {
           this.error = showSearch.Error;
-          console.log("Show search error");
         }
       } else {
         this.error = "Invalid Search, Please Try again";
@@ -107,14 +108,11 @@ export default defineComponent({
           this.title
         }&Season=${seasonNumber}`
       ).then((response) => response.json());
-      console.log("Season?", seasonSearch);
       if (seasonSearch.Response === "True") {
-        console.log("BEFRE?", this.season);
         this.season = { ...seasonSearch };
         this.episodes = await Promise.all(
           this.season.Episodes.map(async (episode) => {
             const episodeData = await this.getEpisode(episode.imdbID);
-            console.log("EP DATA::??", episodeData);
             return episodeData;
           })
         );
