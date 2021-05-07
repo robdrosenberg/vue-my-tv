@@ -18,7 +18,6 @@ export default createStore({
   },
   mutations: {
     updateFavorites(state, data) {
-      console.log("ITS MUTATING")
       state.favorites = data
     }
   }

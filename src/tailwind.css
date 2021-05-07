@@ -3,3 +3,18 @@
 @import 'tailwindcss/components';
 
 @import 'tailwindcss/utilities';
+
+@layer components {
+    .header-link {
+        @apply hover:border-b-2 pb-2 border-blue-500;
+    }
+    .favorite-icon {
+        @apply h-8 w-8 cursor-pointer hover:transform-gpu hover:scale-125 hover:ease-in duration-300;
+    }
+    .main-container {
+        @apply max-w-screen-lg px-4 py-12 mx-auto sm:px-6 lg:py-16 lg:px-8;
+    }
+    .main-heading {
+        @apply text-2xl text-center font-extrabold leading-9 tracking-tight text-gray-900 sm:text-4xl sm:leading-10 mb-10;
+    }
+}

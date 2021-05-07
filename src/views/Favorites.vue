@@ -1,14 +1,10 @@
 
 <template>
   <main>
-    <div class="max-w-screen-xl px-4 py-12 mx-auto sm:px-6 lg:py-16 lg:px-8">
-      <h1
-        class="mt-8 text-2xl font-extrabold leading-9 tracking-tight text-gray-900 sm:text-4xl sm:leading-10 mb-10"
-      >
-        Favorite Episodes
-      </h1>
+    <div class="main-container">
+      <h1 class="main-heading">My Favorites</h1>
       <div>
-        <EpisodeList :episodes="favorites" />
+        <EpisodeList :episodes="favorites" :favoriteList="true" />
       </div>
     </div>
   </main>
