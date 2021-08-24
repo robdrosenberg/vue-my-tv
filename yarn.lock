@@ -311,10 +311,10 @@
   resolved "https://registry.yarnpkg.com/@headlessui/vue/-/vue-1.4.0.tgz#a4a3f392d6e72923f101e307fcfa6c80c00ea446"
   integrity sha512-BBLDciyKiGK03whaSVkUacDY2Cd5AR05JCUPWQLvQ9HtjQc9tv5RyPpcdmoXJa+XWI10e3U1JxL+8FY7kJMcEQ==
 
-"@heroicons/vue@^1.0.1":
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/@heroicons/vue/-/vue-1.0.1.tgz#bd37662a45ed031d9b4ab1c860574e2174ca1bd3"
-  integrity sha512-pClbScVNpkBCHdM86+EAjQ5iUAs1PVjRHDFRNImQQyot75KrAk4SDfeKGDkQqPaGdJ9ZHIK13cl2W0eYc29QWg==
+"@heroicons/vue@^1.0.4":
+  version "1.0.4"
+  resolved "https://registry.yarnpkg.com/@heroicons/vue/-/vue-1.0.4.tgz#dcfd957a9abc827321054e643f6fb73629b3eef6"
+  integrity sha512-jm7JMoUGr7Asn07oYNmewxkdQALnskTzRo17iGpHG/apLcc+GFdvdN4XvWZ2awStodaqeZ4eYWg7UcI0LvLETQ==
 
 "@nodelib/fs.scandir@2.1.4":
   version "2.1.4"
