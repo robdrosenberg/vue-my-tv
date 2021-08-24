@@ -9,7 +9,7 @@
   },
   "dependencies": {
     "apexcharts": "^3.27.3",
-    "firebase": "^8.7.0",
+    "firebase": "^8.10.0",
     "vue": "^3.1.5",
     "vue-router": "^4.0.10",
     "vue3-apexcharts": "^1.4.1",
